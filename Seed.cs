@@ -125,43 +125,6 @@ namespace OnlineStoreAPI
                             Website = "https://www.kitchenpro.com",
                             Country = new Country() { Name = "United Kingdom" }
                         }
-                    },
-                    new ProductSeller()
-                    {
-                        Product = new Product()
-                        {
-                            Name = "Fitness Tracker Watch",
-                            Price = 129.99,
-                            DateListed = new DateTime(2023, 5, 15),
-                            ProductCategories = new List<ProductCategory>()
-                            {
-                                new ProductCategory { Category = new Category() { Name = "Sports & Outdoors" } },
-                                new ProductCategory { Category = new Category() { Name = "Electronics" } }
-                            },
-                            Reviews = new List<Review>()
-                            {
-                                new Review
-                                {
-                                    Title = "Fantastic features",
-                                    Text = "This fitness tracker has all the features I was looking for. It helps me stay motivated and tracks my progress accurately.",
-                                    Rating = 5,
-                                    Reviewer = new Reviewer() { Name = "Sarah Thompson" }
-                                },
-                                new Review
-                                {
-                                    Title = "Poor battery life",
-                                    Text = "The battery life is disappointing. It barely lasts a day even with minimal use.",
-                                    Rating = 3,
-                                    Reviewer = new Reviewer() { Name = "Mark Davis" }
-                                },
-                            }
-                        },
-                        Seller = new Seller()
-                        {
-                            Name = "FitTech",
-                            Website = "https://www.fittech.com",
-                            Country = new Country() { Name = "United States" }
-                        }
                     }
                 };
                 dataContext.ProductSellers.AddRange(productSellers);

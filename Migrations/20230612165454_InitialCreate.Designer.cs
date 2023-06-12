@@ -12,7 +12,7 @@ using OnlineStoreAPI.Data;
 namespace OnlineStoreAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230612015751_InitialCreate")]
+    [Migration("20230612165454_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
