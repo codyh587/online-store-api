@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using OnlineStoreAPI;
 using OnlineStoreAPI.Data;
+using OnlineStoreAPI.Interfaces;
+using OnlineStoreAPI.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddTransient<Seed>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<DataContext>(options =>
