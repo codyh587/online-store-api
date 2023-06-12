@@ -9,5 +9,7 @@ namespace OnlineStoreAPI.Interfaces
         Country GetCountryBySeller(int sellerId);
         ICollection<Seller> GetSellersFromACountry(int countryId);
         bool CountryExists(int id);
+        bool CreateCountry(Country country);
+        bool Save();
     }
 }

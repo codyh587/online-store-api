@@ -8,7 +8,7 @@ namespace OnlineStoreAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductController: Controller
+    public class ProductController : Controller
     {
         private readonly IProductRepository _productRepository;
         private readonly IMapper _mapper;

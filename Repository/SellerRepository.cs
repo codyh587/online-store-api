@@ -13,6 +13,12 @@ namespace OnlineStoreAPI.Repository
             _context = context;
         }
 
+        public bool CreateSeller(Seller seller)
+        {
+            _context.Add(seller);
+            return Save();
+        }
+
         public ICollection<Product> GetProductBySeller(int sellerId)
         {
             return _context.ProductSellers.Where(p => p.Seller.Id == sellerId).Select(p => p.Product).ToList();
@@ -31,6 +37,12 @@ namespace OnlineStoreAPI.Repository
         public ICollection<Seller> GetSellers()
         {
             return _context.Sellers.ToList();
+        }
+
+        public bool Save()
+        {
+            var saved = _context.SaveChanges();
+            return saved > 0 ? true : false;
         }
 
         public bool SellerExists(int id)

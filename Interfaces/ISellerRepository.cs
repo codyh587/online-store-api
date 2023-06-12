@@ -1,4 +1,5 @@
-﻿using OnlineStoreAPI.Models;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using OnlineStoreAPI.Models;
 
 namespace OnlineStoreAPI.Interfaces
 {
@@ -9,5 +10,7 @@ namespace OnlineStoreAPI.Interfaces
         ICollection<Seller> GetSellerOfAProduct(int productId);
         ICollection<Product> GetProductBySeller(int sellerId);
         bool SellerExists(int id);
+        bool CreateSeller(Seller seller);
+        bool Save();
     }
 }

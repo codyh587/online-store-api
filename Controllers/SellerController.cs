@@ -12,11 +12,13 @@ namespace OnlineStoreAPI.Controllers
     public class SellerController: Controller
     {
         private readonly ISellerRepository _sellerRepository;
+        private readonly ICountryRepository _countryRepository;
         private readonly IMapper _mapper;
 
-        public SellerController(ISellerRepository sellerRepository, IMapper mapper)
+        public SellerController(ISellerRepository sellerRepository, ICountryRepository countryRepository, IMapper mapper)
         {
             _sellerRepository = sellerRepository;
+            _countryRepository = countryRepository;
             _mapper = mapper;
         }
 
@@ -54,7 +56,6 @@ namespace OnlineStoreAPI.Controllers
             return Ok(seller);
         }
 
-        // TODO is this wrong?
         [HttpGet("{sellerId}/product")]
         [ProducesResponseType(200, Type = typeof(IEnumerable<Product>))]
         [ProducesResponseType(400)]
@@ -73,6 +74,44 @@ namespace OnlineStoreAPI.Controllers
             }
 
             return Ok(products);
+        }
+
+        [HttpPost]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        public IActionResult CreateSeller([FromQuery] int countryId, [FromBody] SellerDto sellerCreate)
+        {
+            if (sellerCreate == null)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var seller = _sellerRepository.GetSellers()
+                .Where(s => s.Name.Trim().ToUpper() == sellerCreate.Name.TrimEnd().ToUpper())
+                .FirstOrDefault();
+
+            if (seller != null)
+            {
+                ModelState.AddModelError("", "Seller already exists");
+                return StatusCode(422, ModelState);
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var sellerMap = _mapper.Map<Seller>(sellerCreate);
+
+            sellerMap.Country = _countryRepository.GetCountry(countryId);
+
+            if (!_sellerRepository.CreateSeller(sellerMap))
+            {
+                ModelState.AddModelError("", "Something went wrong while saving");
+                return StatusCode(500, ModelState);
+            }
+
+            return Ok("Successfully created");
         }
     }
 }
