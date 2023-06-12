@@ -1,4 +1,5 @@
-﻿using OnlineStoreAPI.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using OnlineStoreAPI.Data;
 using OnlineStoreAPI.Interfaces;
 using OnlineStoreAPI.Models;
 
@@ -38,6 +39,11 @@ namespace OnlineStoreAPI.Repository
             }
 
             return ((decimal) reviews.Sum(r => r.Rating) / reviews.Count());
+        }
+
+        public Product GetProductSeller(int id)
+        {
+            return _context.Products.Where(p => p.Id == id).Include(x => x.ProductSellers).ThenInclude(x => x.Seller).FirstOrDefault();
         }
 
         public bool ProductExists(int id)

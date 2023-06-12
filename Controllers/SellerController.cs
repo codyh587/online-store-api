@@ -12,12 +12,18 @@ namespace OnlineStoreAPI.Controllers
     {
         private readonly ISellerRepository _sellerRepository;
         private readonly ICountryRepository _countryRepository;
+        private readonly IProductRepository _productRepository;
         private readonly IMapper _mapper;
 
-        public SellerController(ISellerRepository sellerRepository, ICountryRepository countryRepository, IMapper mapper)
+        public SellerController(
+            ISellerRepository sellerRepository,
+            ICountryRepository countryRepository,
+            IProductRepository productRepository,
+            IMapper mapper)
         {
             _sellerRepository = sellerRepository;
             _countryRepository = countryRepository;
+            _productRepository = productRepository;
             _mapper = mapper;
         }
 
@@ -73,6 +79,26 @@ namespace OnlineStoreAPI.Controllers
             }
 
             return Ok(products);
+        }
+
+        [HttpGet("seller/{productid}")]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<Seller>))]
+        [ProducesResponseType(400)]
+        public IActionResult GetSellerOfAProduct(int productid)
+        {
+            if (!_productRepository.ProductExists(productid))
+            {
+                return NotFound();
+            }
+
+            var sellers = _mapper.Map<List<SellerDto>>(_sellerRepository.GetSellerOfAProduct(productid));
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            return Ok(sellers);
         }
 
         [HttpPost]

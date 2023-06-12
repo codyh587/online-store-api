@@ -12,11 +12,16 @@ namespace OnlineStoreAPI.Controllers
     public class CountryController: Controller
     {
         private readonly ICountryRepository _countryRepository;
+        private readonly ISellerRepository _sellerRepository;
         private readonly IMapper _mapper;
 
-        public CountryController(ICountryRepository countryRepository, IMapper mapper)
+        public CountryController(
+            ICountryRepository countryRepository,
+            ISellerRepository sellerRepository,
+            IMapper mapper)
         {
             _countryRepository = countryRepository;
+            _sellerRepository = sellerRepository;
             _mapper = mapper;
         }
 
@@ -54,11 +59,16 @@ namespace OnlineStoreAPI.Controllers
             return Ok(country);
         }
 
-        [HttpGet("sellers/{sellerId}")]
+        [HttpGet("{sellerId}/country")]
         [ProducesResponseType(200, Type = typeof(Country))]
         [ProducesResponseType(400)]
         public IActionResult GetCountryOfASeller(int sellerId)
         {
+            if (!_sellerRepository.SellerExists(sellerId))
+            {
+                return NotFound();
+            }
+
             var country = _mapper.Map<CountryDto>(_countryRepository.GetCountryBySeller(sellerId));
 
             if (!ModelState.IsValid)
@@ -67,6 +77,26 @@ namespace OnlineStoreAPI.Controllers
             }
 
             return Ok(country);
+        }
+
+        [HttpGet("{countryId}/sellers")]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<Seller>))]
+        [ProducesResponseType(400)]
+        public IActionResult GetSellersFromACountry(int countryId)
+        {
+            if (!_countryRepository.CountryExists(countryId))
+            {
+                return NotFound();
+            }
+
+            var sellers = _mapper.Map<List<SellerDto>>(_countryRepository.GetSellersFromACountry(countryId));
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            return Ok(sellers);
         }
 
         [HttpPost]
