@@ -21,7 +21,7 @@ namespace OnlineStoreAPI.Repository
 
         public bool DeleteSeller(Seller seller)
         {
-            _context.Remove(owner);
+            _context.Remove(seller);
             return Save();
         }
 
