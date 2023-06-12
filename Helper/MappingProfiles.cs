@@ -8,16 +8,13 @@ namespace OnlineStoreAPI.Helper
     {
         public MappingProfiles()
         {
-            CreateMap<Product, ProductDto>();
+            CreateMap<Product, ProductDto>().ReverseMap();
 
-            CreateMap<Category, CategoryDto>();
-            CreateMap<CategoryDto, Category>();
+            CreateMap<Category, CategoryDto>().ReverseMap();
 
-            CreateMap<Country, CountryDto>();
-            CreateMap<CountryDto, Country>();
+            CreateMap<Country, CountryDto>().ReverseMap();
 
-            CreateMap<Seller, SellerDto>();
-            CreateMap<SellerDto, Seller>();
+            CreateMap<Seller, SellerDto>().ReverseMap();
             
             CreateMap<Review, ReviewDto>();
             

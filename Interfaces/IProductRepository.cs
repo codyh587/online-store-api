@@ -9,5 +9,7 @@ namespace OnlineStoreAPI.Interfaces
         Product GetProduct(string name);
         decimal GetProductRating(int id);
         bool ProductExists(int id);
+        bool CreateProduct(int sellerId, int categoryId, Product product);
+        bool Save();
     }
 }

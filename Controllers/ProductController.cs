@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using OnlineStoreAPI.Dto;
 using OnlineStoreAPI.Interfaces;
 using OnlineStoreAPI.Models;
+using OnlineStoreAPI.Repository;
 
 namespace OnlineStoreAPI.Controllers
 {
@@ -71,6 +72,42 @@ namespace OnlineStoreAPI.Controllers
             }
 
             return Ok(rating);
+        }
+
+        [HttpPost]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        public IActionResult CreateProduct([FromQuery] int sellerId, [FromQuery] int categoryId, [FromBody] ProductDto productCreate)
+        {
+            if (productCreate == null)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var product = _productRepository.GetProducts()
+                .Where(s => s.Name.Trim().ToUpper() == productCreate.Name.TrimEnd().ToUpper())
+                .FirstOrDefault();
+
+            if (product != null)
+            {
+                ModelState.AddModelError("", "Product name already exists");
+                return StatusCode(422, ModelState);
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var productMap = _mapper.Map<Product>(productCreate);
+
+            if (!_productRepository.CreateProduct(sellerId, categoryId, productMap))
+            {
+                ModelState.AddModelError("", "Something went wrong while saving");
+                return StatusCode(500, ModelState);
+            }
+
+            return Ok("Successfully created");
         }
     }
 }

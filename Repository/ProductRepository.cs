@@ -44,5 +44,37 @@ namespace OnlineStoreAPI.Repository
         {
             return _context.Products.Any(p => p.Id == id);
         }
+
+        public bool CreateProduct(int sellerId, int categoryId, Product product)
+        {
+            var productSellerEntity = _context.Sellers.Where(a => a.Id == sellerId).FirstOrDefault();
+            var category = _context.Categories.Where(a => a.Id == categoryId).FirstOrDefault();
+
+            var productSeller = new ProductSeller()
+            {
+                Seller = productSellerEntity,
+                Product = product,
+            };
+
+            _context.Add(productSeller);
+
+            var productCategory = new ProductCategory()
+            {
+                Category = category,
+                Product = product
+            };
+
+            _context.Add(productCategory);
+
+            _context.Add(product);
+
+            return Save();
+        }
+
+        public bool Save()
+        {
+            var saved = _context.SaveChanges();
+            return saved > 0 ? true : false;
+        }
     }
 }
