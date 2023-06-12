@@ -16,9 +16,9 @@ namespace OnlineStoreAPI.Helper
 
             CreateMap<Seller, SellerDto>().ReverseMap();
             
-            CreateMap<Review, ReviewDto>();
+            CreateMap<Review, ReviewDto>().ReverseMap();
             
-            CreateMap<Reviewer, ReviewerDto>();
+            CreateMap<Reviewer, ReviewerDto>().ReverseMap();
         }
     }
 }
