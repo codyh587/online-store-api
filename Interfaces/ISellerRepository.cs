@@ -12,6 +12,7 @@ namespace OnlineStoreAPI.Interfaces
         bool SellerExists(int id);
         bool CreateSeller(Seller seller);
         bool UpdateSeller(Seller seller);
+        bool DeleteSeller(Seller seller);
         bool Save();
     }
 }

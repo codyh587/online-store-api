@@ -19,6 +19,12 @@ namespace OnlineStoreAPI.Repository
             return Save();
         }
 
+        public bool DeleteSeller(Seller seller)
+        {
+            _context.Remove(owner);
+            return Save();
+        }
+
         public ICollection<Product> GetProductBySeller(int sellerId)
         {
             return _context.ProductSellers.Where(p => p.Seller.Id == sellerId).Select(p => p.Product).ToList();

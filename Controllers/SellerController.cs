@@ -149,5 +149,31 @@ namespace OnlineStoreAPI.Controllers
 
             return NoContent();
         }
+
+        [HttpDelete("{sellerId}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        public IActionResult DeleteSeller(int sellerId)
+        {
+            if (!_sellerRepository.SellerExists(sellerId))
+            {
+                return NotFound();
+            }
+
+            var sellerToDelete = _sellerRepository.GetSeller(sellerId);
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (!_sellerRepository.DeleteSeller(sellerToDelete))
+            {
+                ModelState.AddModelError("", "Something went wrong while deleting");
+            }
+
+            return NoContent();
+        }
     }
 }
