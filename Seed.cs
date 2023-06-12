@@ -23,6 +23,7 @@ namespace OnlineStoreAPI
                         Product = new Product()
                         {
                             Name = "Wireless Bluetooth Headphones",
+                            Price = 59.99,
                             DateListed = new DateTime(2023,6,1),
                             ProductCategories = new List<ProductCategory>()
                             {
@@ -58,6 +59,7 @@ namespace OnlineStoreAPI
                         Product = new Product()
                         {
                             Name = "Men's Casual T-Shirt",
+                            Price = 15.99,
                             DateListed = new DateTime(2023, 5, 20),
                             ProductCategories = new List<ProductCategory>()
                             {
@@ -93,6 +95,7 @@ namespace OnlineStoreAPI
                         Product = new Product()
                         {
                             Name = "Stainless Steel Kitchen Knife Set",
+                            Price = 46.99,
                             DateListed = new DateTime(2023, 6, 5),
                             ProductCategories = new List<ProductCategory>()
                             {
@@ -128,6 +131,7 @@ namespace OnlineStoreAPI
                         Product = new Product()
                         {
                             Name = "Fitness Tracker Watch",
+                            Price = 129.99,
                             DateListed = new DateTime(2023, 5, 15),
                             ProductCategories = new List<ProductCategory>()
                             {

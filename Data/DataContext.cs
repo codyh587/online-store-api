@@ -13,6 +13,7 @@ namespace OnlineStoreAPI.Data
         public DbSet<Category> Categories { get; set; }
         public DbSet<Country> Countries { get; set; }
         public DbSet<Seller> Sellers { get; set; }
+        public DbSet<Product> Products { get; set; }
         public DbSet<ProductSeller> ProductSellers { get; set; }
         public DbSet<ProductCategory> ProductCategories { get; set; }
         public DbSet<Review> Reviews { get; set; }

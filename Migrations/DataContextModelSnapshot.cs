@@ -76,7 +76,7 @@ namespace OnlineStoreAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Product");
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("OnlineStoreAPI.Models.ProductCategory", b =>

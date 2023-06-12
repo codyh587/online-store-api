@@ -12,7 +12,7 @@ using OnlineStoreAPI.Data;
 namespace OnlineStoreAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230612005212_InitialCreate")]
+    [Migration("20230612015751_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -79,7 +79,7 @@ namespace OnlineStoreAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Product");
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("OnlineStoreAPI.Models.ProductCategory", b =>
