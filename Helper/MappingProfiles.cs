@@ -10,7 +10,7 @@ namespace OnlineStoreAPI.Helper
         {
             CreateMap<Product, ProductDto>();
             CreateMap<Category, CategoryDto>();
-            CreateMap<Country, CountryDto>
+            CreateMap<Country, CountryDto>();
         }
     }
 }

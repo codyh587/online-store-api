@@ -53,7 +53,7 @@ namespace OnlineStoreAPI.Controllers
             return Ok(country);
         }
 
-        [HttpGet("/sellers/{sellerId}")]
+        [HttpGet("sellers/{sellerId}")]
         [ProducesResponseType(200, Type = typeof(Country))]
         [ProducesResponseType(400)]
         public IActionResult GetCountryOfASeller(int sellerId)
