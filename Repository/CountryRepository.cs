@@ -24,6 +24,12 @@ namespace OnlineStoreAPI.Repository
             return Save();
         }
 
+        public bool DeleteCountry(Country country)
+        {
+            _context.Remove(country);
+            return Save();
+        }
+
         public ICollection<Country> GetCountries()
         {
             return _context.Countries.ToList();
