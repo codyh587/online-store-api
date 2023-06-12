@@ -9,6 +9,7 @@ namespace OnlineStoreAPI.Interfaces
         ICollection<Review> GetReviewsOfAProduct(int productId);
         bool ReviewExists(int id);
         bool CreateReview(Review review);
+        bool UpdateReview(Review review);
         bool Save();
     }
 }
