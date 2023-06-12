@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using OnlineStoreAPI.Dto;
 using OnlineStoreAPI.Interfaces;
 using OnlineStoreAPI.Models;
+using OnlineStoreAPI.Repository;
 
 namespace OnlineStoreAPI.Controllers
 {
@@ -71,6 +72,42 @@ namespace OnlineStoreAPI.Controllers
             }
 
             return Ok(reviews);
+        }
+
+        [HttpPost]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        public IActionResult CreateReviewer([FromBody] ReviewerDto reviewerCreate)
+        {
+            if (reviewerCreate == null)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var reviewers = _reviewerRepository.GetReviewers()
+                .Where(c => c.Name.Trim().ToUpper() == reviewerCreate.Name.TrimEnd().ToUpper())
+                .FirstOrDefault();
+
+            if (reviewers != null)
+            {
+                ModelState.AddModelError("", "Reviewer name already exists");
+                return StatusCode(422, ModelState);
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var reviewerMap = _mapper.Map<Reviewer>(reviewerCreate);
+
+            if (!_reviewerRepository.CreateReviewer(reviewerMap))
+            {
+                ModelState.AddModelError("", "Something went wrong while saving");
+                return StatusCode(500, ModelState);
+            }
+
+            return Ok("Successfully created");
         }
     }
 }
