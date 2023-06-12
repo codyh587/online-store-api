@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using OnlineStoreAPI.Dto;
 using OnlineStoreAPI.Interfaces;
 using OnlineStoreAPI.Models;
-using OnlineStoreAPI.Repository;
 
 namespace OnlineStoreAPI.Controllers
 {

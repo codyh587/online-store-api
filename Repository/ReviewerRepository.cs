@@ -21,7 +21,7 @@ namespace OnlineStoreAPI.Repository
 
         public ICollection<Reviewer> GetReviewers()
         {
-            return _context.Reviewers.ToList();
+            return _context.Reviewers.Include(e => e.Reviews).ToList();
         }
 
         public ICollection<Review> GetReviewsByReviewer(int reviewerId)

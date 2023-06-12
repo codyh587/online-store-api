@@ -12,7 +12,8 @@ namespace OnlineStoreAPI.Helper
             CreateMap<Category, CategoryDto>();
             CreateMap<Country, CountryDto>();
             CreateMap<Seller, SellerDto>();
-            CreateMap<Review, ReviewerDto>();
+            CreateMap<Review, ReviewDto>();
+            CreateMap<Reviewer, ReviewerDto>();
         }
     }
 }
