@@ -155,5 +155,37 @@ namespace OnlineStoreAPI.Controllers
 
             return NoContent();
         }
+
+        [HttpDelete("{productId}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        public IActionResult DeleteProduct(int productId)
+        {
+            if (!_productRepository.ProductExists(productId))
+            {
+                return NotFound();
+            }
+
+            var reviewsToDelete = _reviewRepository.GetReviewsOfAProduct(productId);
+            var productToDelete = _productRepository.GetProduct(productId);
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (!_reviewRepository.DeleteReviews(reviewsToDelete.ToList()))
+            {
+                ModelState.AddModelError("", "Something went wrong while deleting reviews");
+            }
+
+            if (!_productRepository.DeleteProduct(productToDelete))
+            {
+                ModelState.AddModelError("", "Something went wrong while deleting product");
+            }
+
+            return NoContent();
+        }
     }
 }

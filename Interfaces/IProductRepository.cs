@@ -11,6 +11,7 @@ namespace OnlineStoreAPI.Interfaces
         bool ProductExists(int id);
         bool CreateProduct(int sellerId, int categoryId, Product product);
         bool UpdateProduct(int sellerId, int categoryId, Product product);
+        bool DeleteProduct(Product product);
         bool Save();
     }
 }
