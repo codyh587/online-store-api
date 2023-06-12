@@ -12,11 +12,16 @@ namespace OnlineStoreAPI.Controllers
     public class ProductController : Controller
     {
         private readonly IProductRepository _productRepository;
+        private readonly IReviewRepository _reviewRepository;
         private readonly IMapper _mapper;
 
-        public ProductController(IProductRepository productRepository, IMapper mapper)
+        public ProductController(
+            IProductRepository productRepository,
+            IReviewRepository reviewRepository,
+            IMapper mapper)
         {
             _productRepository = productRepository;
+            _reviewRepository = reviewRepository;
             _mapper = mapper;
         }
 
@@ -108,6 +113,47 @@ namespace OnlineStoreAPI.Controllers
             }
 
             return Ok("Successfully created");
+        }
+
+        [HttpPut("{productId}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        public IActionResult UpdateProduct(
+            int productId,
+            [FromQuery] int sellerId,
+            [FromQuery] int categoryId,
+            [FromBody] ProductDto updatedProduct)
+        {
+            if (updatedProduct == null)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (productId != updatedProduct.Id)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (!_productRepository.ProductExists(productId))
+            {
+                return NotFound();
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            var productMap = _mapper.Map<Product>(updatedProduct);
+
+            if (!_productRepository.UpdateProduct(sellerId, categoryId, productMap))
+            {
+                ModelState.AddModelError("", "Something went wrong while updating");
+                return StatusCode(500, ModelState);
+            }
+
+            return NoContent();
         }
     }
 }

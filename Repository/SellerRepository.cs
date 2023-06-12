@@ -49,5 +49,11 @@ namespace OnlineStoreAPI.Repository
         {
             return _context.Sellers.Any(s => s.Id == id);
         }
+
+        public bool UpdateSeller(Seller seller)
+        {
+            _context.Update(seller);
+            return Save();
+        }
     }
 }

@@ -76,5 +76,11 @@ namespace OnlineStoreAPI.Repository
             var saved = _context.SaveChanges();
             return saved > 0 ? true : false;
         }
+
+        public bool UpdateProduct(int sellerId, int categoryId, Product product)
+        {
+            _context.Update(product);
+            return Save();
+        }
     }
 }

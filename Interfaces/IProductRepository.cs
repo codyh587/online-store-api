@@ -10,6 +10,7 @@ namespace OnlineStoreAPI.Interfaces
         decimal GetProductRating(int id);
         bool ProductExists(int id);
         bool CreateProduct(int sellerId, int categoryId, Product product);
+        bool UpdateProduct(int sellerId, int categoryId, Product product);
         bool Save();
     }
 }

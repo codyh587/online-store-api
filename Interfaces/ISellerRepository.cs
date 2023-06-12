@@ -11,6 +11,7 @@ namespace OnlineStoreAPI.Interfaces
         ICollection<Product> GetProductBySeller(int sellerId);
         bool SellerExists(int id);
         bool CreateSeller(Seller seller);
+        bool UpdateSeller(Seller seller);
         bool Save();
     }
 }
