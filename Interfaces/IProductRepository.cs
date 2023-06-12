@@ -8,6 +8,6 @@ namespace OnlineStoreAPI.Interfaces
         Product GetProduct(int id);
         Product GetProduct(string name);
         decimal GetProductRating(int id);
-        bool productExists(int id);
+        bool ProductExists(int id);
     }
 }

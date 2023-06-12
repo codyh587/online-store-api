@@ -40,7 +40,7 @@ namespace OnlineStoreAPI.Repository
             return ((decimal) reviews.Sum(r => r.Rating) / reviews.Count());
         }
 
-        public bool productExists(int id)
+        public bool ProductExists(int id)
         {
             return _context.Products.Any(p => p.Id == id);
         }
