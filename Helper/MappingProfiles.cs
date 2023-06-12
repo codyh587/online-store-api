@@ -9,6 +9,8 @@ namespace OnlineStoreAPI.Helper
         public MappingProfiles()
         {
             CreateMap<Product, ProductDto>();
+            CreateMap<Category, CategoryDto>();
+            CreateMap<Country, CountryDto>
         }
     }
 }
