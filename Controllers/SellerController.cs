@@ -54,8 +54,9 @@ namespace OnlineStoreAPI.Controllers
             return Ok(seller);
         }
 
+        // TODO is this wrong?
         [HttpGet("{sellerId}/product")]
-        [ProducesResponseType(200, Type = typeof(Seller))]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<Product>))]
         [ProducesResponseType(400)]
         public IActionResult GetProductBySeller(int sellerId)
         {
@@ -64,14 +65,14 @@ namespace OnlineStoreAPI.Controllers
                 return NotFound();
             }
 
-            var seller = _mapper.Map<List<ProductDto>>(_sellerRepository.GetProductBySeller(sellerId));
+            var products = _mapper.Map<List<ProductDto>>(_sellerRepository.GetProductBySeller(sellerId));
 
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            return Ok(seller);
+            return Ok(products);
         }
     }
 }
