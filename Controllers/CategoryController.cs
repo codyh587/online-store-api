@@ -55,7 +55,7 @@ namespace OnlineStoreAPI.Controllers
             return Ok(category);
         }
 
-        [HttpGet("product/{categoryId}")]
+        [HttpGet("{categoryId}/product")]
         [ProducesResponseType(200, Type = typeof(IEnumerable<Product>))]
         [ProducesResponseType(400)]
         public IActionResult GetProductByCategoryId(int categoryId)
@@ -68,6 +68,21 @@ namespace OnlineStoreAPI.Controllers
             }
 
             return Ok(products);
+        }
+
+        [HttpGet("{productId}/category")]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<Category>))]
+        [ProducesResponseType(400)]
+        public IActionResult GetCategoryOfAProduct(int productId)
+        {
+            var categories = _mapper.Map<List<CategoryDto>>(_categoryRepository.GetCategoryOfAProduct(productId));
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            return Ok(categories);
         }
 
         [HttpPost]

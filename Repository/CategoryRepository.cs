@@ -45,6 +45,11 @@ namespace OnlineStoreAPI.Repository
             return _context.ProductCategories.Where(e => e.CategoryId == categoryId).Select(c => c.Product).ToList();
         }
 
+        public ICollection<Category> GetCategoryOfAProduct(int productId)
+        {
+            return _context.ProductCategories.Where(e => e.ProductId == productId).Select(c => c.Category).ToList();
+        }
+
         public bool Save()
         {
             var saved = _context.SaveChanges();

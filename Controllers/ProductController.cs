@@ -82,7 +82,10 @@ namespace OnlineStoreAPI.Controllers
         [HttpPost]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
-        public IActionResult CreateProduct([FromQuery] int sellerId, [FromQuery] int categoryId, [FromBody] ProductDto productCreate)
+        public IActionResult CreateProduct(
+            [FromQuery] IEnumerable<int> sellerIds,
+            [FromQuery] IEnumerable<int> categoryIds,
+            [FromBody] ProductDto productCreate)
         {
             if (productCreate == null)
             {
@@ -106,7 +109,7 @@ namespace OnlineStoreAPI.Controllers
 
             var productMap = _mapper.Map<Product>(productCreate);
 
-            if (!_productRepository.CreateProduct(sellerId, categoryId, productMap))
+            if (!_productRepository.CreateProduct(sellerIds.ToList(), categoryIds.ToList(), productMap))
             {
                 ModelState.AddModelError("", "Something went wrong while saving");
                 return StatusCode(500, ModelState);
@@ -121,8 +124,8 @@ namespace OnlineStoreAPI.Controllers
         [ProducesResponseType(404)]
         public IActionResult UpdateProduct(
             int productId,
-            [FromQuery] int sellerId,
-            [FromQuery] int categoryId,
+            [FromQuery] IEnumerable<int> sellerIds,
+            [FromQuery] IEnumerable<int> categoryIds,
             [FromBody] ProductDto updatedProduct)
         {
             if (updatedProduct == null)
@@ -147,7 +150,7 @@ namespace OnlineStoreAPI.Controllers
 
             var productMap = _mapper.Map<Product>(updatedProduct);
 
-            if (!_productRepository.UpdateProduct(sellerId, categoryId, productMap))
+            if (!_productRepository.UpdateProduct(sellerIds.ToList(), categoryIds.ToList(), productMap))
             {
                 ModelState.AddModelError("", "Something went wrong while updating");
                 return StatusCode(500, ModelState);
