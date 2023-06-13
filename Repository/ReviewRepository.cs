@@ -46,6 +46,11 @@ namespace OnlineStoreAPI.Repository
             return _context.Reviews.Where(r => r.Product.Id == productId).ToList();
         }
 
+        public Reviewer GetReviewAuthor(int reviewId)
+        {
+            return _context.Reviews.Where(r => r.Id == reviewId).Select(r => r.Reviewer).FirstOrDefault();
+        }
+
         public bool ReviewExists(int id)
         {
             return _context.Reviews.Any(r => r.Id == id);

@@ -62,7 +62,7 @@ namespace OnlineStoreAPI.Controllers
             return Ok(review);
         }
 
-        [HttpGet("product/{productId}")]
+        [HttpGet("{productId}/product")]
         [ProducesResponseType(200, Type = typeof(IEnumerable<Review>))]
         [ProducesResponseType(400)]
         public IActionResult GetReviewsForAProduct(int productId)
@@ -75,6 +75,21 @@ namespace OnlineStoreAPI.Controllers
             }
 
             return Ok(reviews);
+        }
+
+        [HttpGet("{reviewId}/reviewer")]
+        [ProducesResponseType(200, Type = typeof(Reviewer))]
+        [ProducesResponseType(400)]
+        public IActionResult GetReviewAuthor(int reviewId)
+        {
+            var reviewer = _mapper.Map<ReviewerDto>(_reviewRepository.GetReviewAuthor(reviewId));
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            return Ok(reviewer);
         }
 
         [HttpPost]
