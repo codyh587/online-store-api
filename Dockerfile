@@ -14,5 +14,5 @@ FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS final
 WORKDIR /app
 ENV ASPNETCORE_URLS=http://*:8080
 EXPOSE 8080
-COPY --from=publish /app/publish .
+COPY --from=build /app/publish .
 ENTRYPOINT ["dotnet", "OnlineStoreAPI.dll"]
