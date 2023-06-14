@@ -81,7 +81,7 @@ namespace OnlineStoreAPI.Controllers
             return Ok(products);
         }
 
-        [HttpGet("seller/{productid}")]
+        [HttpGet("{productid}/seller")]
         [ProducesResponseType(200, Type = typeof(IEnumerable<Seller>))]
         [ProducesResponseType(400)]
         public IActionResult GetSellerOfAProduct(int productid)
