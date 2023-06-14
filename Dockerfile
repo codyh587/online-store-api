@@ -1,25 +1,18 @@
 #See https://aka.ms/customizecontainer to learn how to customize your debug container and how Visual Studio uses this Dockerfile to build your images for faster debugging.
 
-# Get ASP.NET Core runtime image, allow HTTP and HTTPS
-FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
-WORKDIR /app
-ENV ASPNETCORE_URLS=http://*:8080
-EXPOSE 8080
-
-# Get .NET SDK, install dependencies
+# Get .NET SDK, install dependencies, and create optimized production build
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["OnlineStoreAPI.csproj", "."]
 RUN dotnet restore "./OnlineStoreAPI.csproj"
 COPY . .
 WORKDIR "/src/."
-
-# Create optimized production build
-FROM build AS publish
 RUN dotnet publish "OnlineStoreAPI.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
-# Run with optimized ASP.NET Core runtime image
-FROM base AS final
+# Get optimized ASP.NET Core runtime image and listen on 8080
+FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS final
 WORKDIR /app
+ENV ASPNETCORE_URLS=http://*:8080
+EXPOSE 8080
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "OnlineStoreAPI.dll"]
