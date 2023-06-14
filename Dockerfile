@@ -2,6 +2,9 @@
 
 # Get ASP.NET Core runtime image, allow HTTP and HTTPS
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
+WORKDIR /app
+ENV ASPNETCORE_URLS=http://*:8080
+EXPOSE 8080
 
 # Get .NET SDK, install dependencies
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
@@ -19,6 +22,4 @@ RUN dotnet publish "OnlineStoreAPI.csproj" -c Release -o /app/publish /p:UseAppH
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENV ASPNETCORE_URLS=http://*:8080
-EXPOSE 8080
 ENTRYPOINT ["dotnet", "OnlineStoreAPI.dll"]
