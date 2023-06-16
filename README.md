@@ -1,6 +1,10 @@
 # online-store-api
-### REST API
-description
+
+### RESTful web API for manipulating entity relationships representing an e-commerce website.
+
+Built using:
+* 
+* 
 
 ### API Endpoints
 
