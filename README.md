@@ -3,7 +3,17 @@
 ### RESTful web API for manipulating entity relationships representing an e-commerce website.
 
 Built using:
-* 
+* ASP.NET Core
+* Entity Framework Core OR/M
+* Deployment to GCP Cloud Run
+* Microsoft SQL Server Express deployment to GCP Cloud SQL
+* CI/CD pipeline with GCP Cloud Build
+
+The following design patterns were used:
+* MVC
+* DTOs
+* Repository pattern
+* Dependency injection
 * 
 
 ### API Endpoints
