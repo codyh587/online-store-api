@@ -9,12 +9,12 @@ Built using:
 * Microsoft SQL Server Express deployment to GCP Cloud SQL
 * CI/CD pipeline with GCP Cloud Build
 
-The following design patterns were used:
-* MVC
+The following design patterns/techniques were used:
 * DTOs
+* MVC pattern
 * Repository pattern
 * Dependency injection
-* 
+* EF Core "<a target="_blank" rel="noopener noreferrer" href="https://www.thereformedprogrammer.net/updating-many-to-many-relationships-in-ef-core-5-and-above/">indirect many-to-many relationships</a>" (explicit join tables)
 
 ### API Endpoints
 
