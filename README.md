@@ -24,7 +24,7 @@ The following design patterns/techniques were used:
 
 ### Application Architecture
 
-![architecture-diagram](https://github.com/codyh587/online-store-api/assets/108317527/c6ed43cd-948b-4de3-88e2-6b9ac6d9cdf3)
+![architecture-diagram](https://github.com/codyh587/online-store-api/assets/108317527/4f3e42bd-2881-4a6f-abcf-2692cf7c5d69)
 
 ### Entity Relationships
 
