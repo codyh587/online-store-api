@@ -4,9 +4,9 @@
 
 Built using:
 * ASP.NET Core
-* Entity Framework Core OR/M
-* Deployment to GCP Cloud Run
-* Microsoft SQL Server Express deployment to GCP Cloud SQL
+* Entity Framework Core O/RM
+* Docker deployment to GCP Cloud Run
+* Microsoft SQL Server deployment to GCP Cloud SQL
 * CI/CD pipeline with GCP Cloud Build
 
 The following design patterns/techniques were used:
@@ -14,13 +14,14 @@ The following design patterns/techniques were used:
 * MVC pattern
 * Repository pattern
 * Dependency injection
+* Database schema migrations via EF Core
 * EF Core "<a target="_blank" rel="noopener noreferrer" href="https://www.thereformedprogrammer.net/updating-many-to-many-relationships-in-ef-core-5-and-above/">indirect many-to-many relationships</a>" (explicit join tables)
 
 ### API Endpoints
 
 | Resource | Method | Description | Returns |
 | --- | --- | --- | --- |
-| --- | --- | --- | --- |
+| /api/Categories | GET | Returns all categories. | 200 OK |
 
 ### Application Architecture
 
