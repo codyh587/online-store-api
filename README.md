@@ -19,22 +19,22 @@ The following design patterns/techniques were used:
 
 ### API Endpoints
 
-| Resource | Method | Description |
-| --- | --- | --- |
-| | | |
-| <b>Category</b> | | |
-| `/api/Category` | `GET` | Returns all categories. |
-| `/api/Category/{categoryId}` | `GET` | Returns a specified category. |
-| `/api/Category/{categoryId}/product` | `GET` | Returns all products with a specified category. |
-| `/api/Category/{productId}/category` | `GET` | Returns the categories of a specified product. |
-| `/api/Category` | `POST` | Creates a new category. |
-| `/api/Category/{categoryId}` | `PUT` | Updates a specified category. |
+| Resource | Method | Description | Returns |
+| --- | --- | --- | --- |
+| | | | |
+| <b>Category</b> | | | |
+| `/api/Category` | `GET` | Returns all categories. | `200 OK` <br> `400 Bad Request` |
+| `/api/Category/{categoryId}` | `GET` | Returns a specified category. | `200 OK` <br> `400 Bad Request` <br> `404 Not Found` |
+| `/api/Category/{categoryId}/product` | `GET` | Returns all products of a specified category. | `200 OK` <br> `400 Bad Request` <br> `404 Not Found` |
+| `/api/Category/{productId}/category` | `GET` | Returns all categories of a specified product. | `200 OK` <br> `400 Bad Request` <br> `404 Not Found` |
+| `/api/Category` | `POST` | Creates a new category. | `200 OK` <br> `400 Bad Request` <br> `422 Unprocessable Content` |
+| `/api/Category/{categoryId}` | `PUT` | Updates a specified category. | `200 OK` <br> `400 Bad Request` <br> `404 Not Found` <br> `500 Internal Server Error` |
 | `/api/Category/{categoryId}` | `DELETE` | Deletes a specified category. |
 | | | |
 | <b>Country</b> | | |
 | `/api/Country` | `GET` | Returns all countries. |
 | `/api/Country/{countryId}` | `GET` | Returns a specified country. |
-| `/api/Country/{countryId}/sellers` | `GET` | Returns all sellers from a specified country. |
+| `/api/Country/{countryId}/sellers` | `GET` | Returns all sellers of a specified country. |
 | `/api/Country/{sellerId}/country` | `GET` | Returns the country of a specified seller. |
 | `/api/Country` | `POST` | Creates a new country. |
 | `/api/Country/{countryId}` | `PUT` | Updates a specified country. |
@@ -51,21 +51,28 @@ The following design patterns/techniques were used:
 | <b>Review</b> | | |
 | `/api/Review` | `GET` | Returns all reviews. |
 | `/api/Review/{reviewId}` | `GET` | Returns a specified review. |
-| `/api/Review/{productId}/product` | `GET` | Returns the reviews of a specified product. |
+| `/api/Review/{productId}/product` | `GET` | Returns all reviews of a specified product. |
 | `/api/Review/{reviewId}/reviewer` | `GET` | Returns the reviewer of a specified review. |
 | `/api/Review` | `POST` | Creates a new review. |
 | `/api/Review/{reviewId}` | `PUT` | Updates a specified review. |
 | `/api/Review/{reviewId}` | `DELETE` | Deletes a specified review. |
 | | | |
 | <b>Reviewer</b> | | |
-| `/api/Reviewer` | `GET` | Returns all reviews. |
-| `/api/Review/{reviewId}` | `GET` | Returns a specified review. |
-| `/api/Review/{productId}/product` | `GET` | Returns the reviews of a specified product. |
-| `/api/Review/{reviewId}/reviewer` | `GET` | Returns the reviewer of a specified review. |
-| `/api/Review` | `POST` | Creates a new review. |
-| `/api/Review/{reviewId}` | `PUT` | Updates a specified review. |
-| `/api/Review/{reviewId}` | `DELETE` | Deletes a specified review. |
-
+| `/api/Reviewer` | `GET` | Returns all reviewers. |
+| `/api/Reviewer/{reviewerId}` | `GET` | Returns a specified reviewer. |
+| `/api/Reviewer/{reviewerId}/reviews` | `GET` | Returns all reviews of a specified reviewer. |
+| `/api/Reviewer` | `POST` | Creates a new reviewer. |
+| `/api/Reviewer/{reviewerId}` | `PUT` | Updates a specified reviewer. |
+| `/api/Reviewer/{reviewerId}` | `DELETE` | Deletes a specified reviewer. |
+| | | |
+| <b>Seller</b> | | |
+| `/api/Seller` | `GET` | Returns all sellers. |
+| `/api/Seller/{sellerId}` | `GET` | Returns a specified seller. |
+| `/api/Seller/{sellerId}/product` | `GET` | Returns all products of a specified seller. |
+| `/api/Seller/{productId}/seller` | `GET` | Returns all sellers of a specified product. |
+| `/api/Seller` | `POST` | Creates a new seller. |
+| `/api/Seller/{sellerId}` | `PUT` | Updates a specified seller. |
+| `/api/Seller/{sellerId}` | `DELETE` | Deletes a specified seller. |
 
 ### Application Architecture
 
