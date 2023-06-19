@@ -19,9 +19,53 @@ The following design patterns/techniques were used:
 
 ### API Endpoints
 
-| Resource | Method | Description | Returns |
-| --- | --- | --- | --- |
-| /api/Categories | GET | Returns all categories. | 200 OK |
+| Resource | Method | Description |
+| --- | --- | --- |
+| | | |
+| <b>Category</b> | | |
+| `/api/Category` | `GET` | Returns all categories. |
+| `/api/Category/{categoryId}` | `GET` | Returns a specified category. |
+| `/api/Category/{categoryId}/product` | `GET` | Returns all products with a specified category. |
+| `/api/Category/{productId}/category` | `GET` | Returns the categories of a specified product. |
+| `/api/Category` | `POST` | Creates a new category. |
+| `/api/Category/{categoryId}` | `PUT` | Updates a specified category. |
+| `/api/Category/{categoryId}` | `DELETE` | Deletes a specified category. |
+| | | |
+| <b>Country</b> | | |
+| `/api/Country` | `GET` | Returns all countries. |
+| `/api/Country/{countryId}` | `GET` | Returns a specified country. |
+| `/api/Country/{countryId}/sellers` | `GET` | Returns all sellers from a specified country. |
+| `/api/Country/{sellerId}/country` | `GET` | Returns the country of a specified seller. |
+| `/api/Country` | `POST` | Creates a new country. |
+| `/api/Country/{countryId}` | `PUT` | Updates a specified country. |
+| `/api/Country/{countryId}` | `DELETE` | Deletes a specified country. |
+| | | |
+| <b>Product</b> | | |
+| `/api/Product` | `GET` | Returns all products. |
+| `/api/Product/{productId}` | `GET` | Returns a specified product. |
+| `/api/Product/{productId}/rating` | `GET` | Returns the average rating of a specified product. |
+| `/api/Product` | `POST` | Creates a new product. |
+| `/api/Product/{productId}` | `PUT` | Updates a specified product. |
+| `/api/Product/{productId}` | `DELETE` | Deletes a specified product. |
+| | | |
+| <b>Review</b> | | |
+| `/api/Review` | `GET` | Returns all reviews. |
+| `/api/Review/{reviewId}` | `GET` | Returns a specified review. |
+| `/api/Review/{productId}/product` | `GET` | Returns the reviews of a specified product. |
+| `/api/Review/{reviewId}/reviewer` | `GET` | Returns the reviewer of a specified review. |
+| `/api/Review` | `POST` | Creates a new review. |
+| `/api/Review/{reviewId}` | `PUT` | Updates a specified review. |
+| `/api/Review/{reviewId}` | `DELETE` | Deletes a specified review. |
+| | | |
+| <b>Reviewer</b> | | |
+| `/api/Reviewer` | `GET` | Returns all reviews. |
+| `/api/Review/{reviewId}` | `GET` | Returns a specified review. |
+| `/api/Review/{productId}/product` | `GET` | Returns the reviews of a specified product. |
+| `/api/Review/{reviewId}/reviewer` | `GET` | Returns the reviewer of a specified review. |
+| `/api/Review` | `POST` | Creates a new review. |
+| `/api/Review/{reviewId}` | `PUT` | Updates a specified review. |
+| `/api/Review/{reviewId}` | `DELETE` | Deletes a specified review. |
+
 
 ### Application Architecture
 
